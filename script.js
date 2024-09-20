@@ -14,7 +14,11 @@ function getComputerChoice() {
   }
 }
 
+// declared computers score to 0
+let computerScore = "Computers Score " + 0;
+
 console.log(getComputerChoice());
+console.log(computerScore);
 
 //The next step we will right function called getHumanChoice and we will return it with the players choice of rock, paper, scissors.
 // I created a funtion called getHumanChoice() with in the body of the function I crated a constant variable named answer I assigned a prompt method to the variable saying "rock, paper, or scissors?". Then I added a switch statement with the exspresion answer from the constant variable the first case was "rock" and it returned "rock" same with "peper", and "scissors". Finally we console.log(getHumanChoice()); So it displays the players choice.
@@ -28,8 +32,13 @@ function getHumanChoice() {
       return("paper");
     case "scissors": // payer chooses scissors
       return("scissors");
+    default: // if the player input is invalid
+      return "Invalid choice, please select rock, paper, or scissors.";
   }
 }
 
+// Declared human score to 0.
+let humanScore = "Humans Score " + 0;
 
 console.log(getHumanChoice());
+console.log(humanScore);
