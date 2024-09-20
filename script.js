@@ -15,3 +15,21 @@ function getComputerChoice() {
 }
 
 console.log(getComputerChoice());
+
+//The next step we will right function called getHumanChoice and we will return it with the players choice of rock, paper, scissors.
+// I created a funtion called getHumanChoice() with in the body of the function I crated a constant variable named answer I assigned a prompt method to the variable saying "rock, paper, or scissors?". Then I added a switch statement with the exspresion answer from the constant variable the first case was "rock" and it returned "rock" same with "peper", and "scissors". Finally we console.log(getHumanChoice()); So it displays the players choice.
+
+function getHumanChoice() {
+  const answer = prompt("rock, paper, or scissors?"); // Ask the player between rock, paper, or scissors
+  switch (answer) {
+    case "rock": // player chooses rock
+      return("rock");
+    case "paper": // player chooses paper
+      return("paper");
+    case "scissors": // payer chooses scissors
+      return("scissors");
+  }
+}
+
+
+console.log(getHumanChoice());
