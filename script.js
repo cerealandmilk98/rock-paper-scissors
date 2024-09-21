@@ -1,87 +1,87 @@
-// Made a script.js connected to my index.html.
-
-// We will try to write a funtion named getComputerChoice. We want this function to randomly return one of the following string values: "rock", "paper", or "scissors".
-// First we created a function and named it get ComputetChoice() to show it was the computers choice on the random number. We didn't put a argument in the () because it didn't have a specific input. In the function body we put constant variable named randomNumber and assigned it the the Math object with the .random method.
-// After the randome number variable we created a if statement conditional. if random number was less than 0.3 return rock, else if random number was less than 0.6 return paper, else return scissors if it's more than 0.6.
+// Function to randomly choose between "rock", "paper", or "scissors" for the computer
 function getComputerChoice() {
   const randomNumber = Math.random(); // Get a random number between 0 and 1
-  if (randomNumber < 0.3) {
-    return "rock"; // If randomNumber is less than 0.3, return "rock"
-  } else if (randomNumber < 0.6) {
-    return "paper"; // If between 0.3 and 0.6, return "paper"
+  if (randomNumber < 0.33) {
+    return "rock"; // Less than 0.33 returns "rock"
+  } else if (randomNumber < 0.66) {
+    return "paper"; // Between 0.33 and 0.66 returns "paper"
   } else {
-    return "scissors"; // If greater than 0.6, return "scissors"
+    return "scissors"; // Greater than 0.66 returns "scissors"
   }
 }
 
-// declared computers score to 0
-let computerScore = 0;
-// Declared human score to 0.
-let humanScore = 0;
-
-//The next step we will right function called getHumanChoice and we will return it with the players choice of rock, paper, scissors.
-// I created a funtion called getHumanChoice() with in the body of the function I crated a constant variable named answer I assigned a prompt method to the variable saying "rock, paper, or scissors?". Then I added a switch statement with the exspresion answer from the constant variable the first case was "rock" and it returned "rock" same with "peper", and "scissors". Finally we console.log(getHumanChoice()); So it displays the players choice.
-
+// Function to get the human player's choice using a prompt
 function getHumanChoice() {
-  const answer = prompt("rock, paper, or scissors?").toLowerCase(); // Ask the player between rock, paper, or scissors
-  switch (answer) {
-    case "rock": // player chooses rock
-    case "paper": // player chooses paper
-    case "scissors": // payer chooses scissors
-      return answer;
-    default:
-      return null; // Return null for invalid 
-  }
+  let choice;
+  do {
+    choice = prompt("Choose rock, paper, or scissors:").toLowerCase(); // Ask the user for input
+  } while (choice !== "rock" && choice !== "paper" && choice !== "scissors"); // Repeat until valid
+  return choice;
 }
 
+// Function to play a single round of the game
 function playRound(humanChoice, computerChoice) {
-  if (!humanChoice) { // Check if humanChoice is invalid
-    return "Invalid choice, please select rock, paper, or scissors.";
-  }
-
   if (humanChoice === computerChoice) {
     return "It's a tie!";
   }
 
+  // Check who wins each scenario
   if (humanChoice === "rock") {
     if (computerChoice === "scissors") {
-      humanScore++; 
-      return "You win! Rock beats Scissors";
+      return "You win! Rock beats Scissors.";
     } else {
-      computerScore++; 
-      return "You lose! Paper beats Rock";
+      return "You lose! Paper beats Rock.";
     }
-  }
-
-  if (humanChoice === "scissors") {
-    if (computerChoice === "paper") {
-      humanScore++; 
-      return "You win! Scissors beats Paper";
-    } else {
-      computerScore++; 
-      return "You lose! Rock beats Scissors";
-    }
-  }
-
-  if (humanChoice === "paper") {
+  } else if (humanChoice === "paper") {
     if (computerChoice === "rock") {
-      humanScore++; 
-      return "You win! Paper beats Rock";
+      return "You win! Paper beats Rock.";
     } else {
-      computerScore++; 
-      return "You lose! Scissors beats Paper";
+      return "You lose! Scissors beats Paper.";
+    }
+  } else if (humanChoice === "scissors") {
+    if (computerChoice === "paper") {
+      return "You win! Scissors beats Paper.";
+    } else {
+      return "You lose! Rock beats Scissors.";
     }
   }
 }
 
+// Main function to run the game for 5 rounds
+function playGame() {
+  let humanScore = 0;
+  let computerScore = 0;
 
+  // Play 5 rounds of the game
+  for (let i = 0; i < 5; i++) {
+    const humanChoice = getHumanChoice(); // Get the human player's choice
+    const computerChoice = getComputerChoice(); // Get the computer's random choice
 
-const humanSelection = getHumanChoice(); // Get player's choice
-const computerSelection = getComputerChoice(); // Get computer's random choice
+    console.log(`You chose: ${humanChoice}`);
+    console.log(`The computer chose: ${computerChoice}`);
 
-console.log(`Human chose: ${humanSelection}`);
-console.log(`Computer chose: ${computerSelection}`);
+    const result = playRound(humanChoice, computerChoice); // Play the round
+    console.log(result); // Display the result of the round
 
-const result = playRound(humanSelection, computerSelection); // Determine the winner
-console.log(result); // Show the result
-console.log(`Scores - Human: ${humanScore}, Computer: ${computerScore}`); // Show the updated scores
+    // Update scores based on result
+    if (result.includes("win")) {
+      humanScore++;
+    } else if (result.includes("lose")) {
+      computerScore++;
+    }
+
+    console.log(`Score: You - ${humanScore}, Computer - ${computerScore}`); // Show updated score
+  }
+
+  // Final result after 5 rounds
+  if (humanScore > computerScore) {
+    console.log("Congratulations, you won the game!");
+  } else if (humanScore < computerScore) {
+    console.log("The computer won the game. Better luck next time!");
+  } else {
+    console.log("It's a tie game!");
+  }
+}
+
+// Start the game by calling playGame function
+playGame();
